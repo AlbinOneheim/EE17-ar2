@@ -3,7 +3,7 @@
     $nummer = [
         "1" => "1",
         "2" => "2",
-        "3" => "3",
+        "3" => "3"
     ];
     
     if (array_key_exists("1", $nummer)){
@@ -47,7 +47,7 @@
     echo "<br>";
     $telefonNummer = [
         "Pontus" => "295 123 123 <br>",
-        "Brutals" => "123 453 656",
+        "Brutals" => "123 453 656"
     ];
     foreach($telefonNummer as $namn => $telefonNummer1){
         echo "$namn nummer är $telefonNummer1";
@@ -57,9 +57,21 @@
     echo "<br>";
     $frukter = [
         "Äpple" => "Grön <br>",
-        "Mandarin" => "Orange",
+        "Mandarin" => "Orange"
     ];
     foreach ($frukter as $farger => $frukter1) {
         echo "$farger har färgen $frukter1";
     }
 ?>
+
+<?php
+    echo "<br>";
+    $farger = [
+        "Svart" => "Gul <br>",
+        "Grön" => "Vit"
+    ];
+    foreach ($farger as $farger => $farger1){
+        echo "$farger passar med färgen $farger1";
+
+    }
+?> 
