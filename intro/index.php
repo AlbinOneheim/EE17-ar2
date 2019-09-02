@@ -5,12 +5,15 @@
 * @author     Karim Ryde <karye.webb@gmail.com>
 * @license    PHP CC
 */
+/* Variabel */
 ?>
 <?php 
     $namn = "Carl";
     $mittEfternamn = "Brutal";
     $ålder = 18;
     $gatuAdress = "Lindaus Väg 20";
+    $x = 3;
+    $y = 5;
 
     /* testar <h1> */
     echo "<h1>";
@@ -30,6 +33,9 @@
     /* hur man sätter ihop text smartast */
     echo "Mitt namn är $namn, jag bor på $gatuAdress<br>"; 
     /* med enkel fnutt */
-    echo 'Mitt namn är $namn, jag bor på $gatuAdress<br>'; 
-
+    echo 'Mitt namn är $namn, jag bor på $gatuAdress<br>';
+    
+    echo "<h4>";
+        echo "pluss";
+    echo "</h4>";
 ?>
