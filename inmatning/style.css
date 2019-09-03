@@ -1,0 +1,15 @@
+form{
+    width: 500px;
+    margin: 30px auto;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 10px;
+}
+.kontainer{
+    width: 500px;
+    margin: 10% auto;
+    background: lightgray;
+    box-shadow: 1px 1px 15px #000;
+    border-radius: 5px;
+}
