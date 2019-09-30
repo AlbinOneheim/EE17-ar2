@@ -8,22 +8,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>  
-    <form action="./uppgift-4-0.php" method="POST">
-        <h2>Namnlista</h2><br>  
+    <form action="./uppgift-4-1.php" method="POST">
+        <h2>Sorterad</h2><br>  
         <label>Namnen</label><br>
-        <input type="text" name="namn[]" required>
-        <input type="text" name="namn[]" required>
-        <input type="text" name="namn[]" required>
-        <input type="text" name="namn[]" required>
-        <input type="text" name="namn[]" required>
+        <input type="text" name="namn1" required>
+        <input type="text" name="namn2" required>
+        <input type="text" name="namn3" required>
+        <input type="text" name="namn4" required>
+        <input type="text" name="namn5" required>
 
         <button class="tertiary">Skicka</button>
     </form>
     <?php 
-        $namn = filter_input_array(INPUT_POST)["namn"];
+        $namn = filter_input_array(INPUT_POST);
         if ($namn) {
-            //var_dump($namn["namn"]);
-
+            
+            sort($namn);
             foreach ($namn as $namnet) {
                 echo "<p>$namnet</p>";
             }

@@ -26,20 +26,20 @@
         <button class="tertiary">Skicka</button>
     </form>
     <?php 
-            if (isset($_REQUEST["tid"], $_REQUEST["belopp"], $_REQUEST["ränta"])) {
+            $belopp = filter_input(INPUT_POST, "belopp", FILTER_DEFAULT);
+            $tid = filter_input(INPUT_POST, "tid", FILTER_DEFAULT);
+            $ränta = filter_input(INPUT_POST, "ränta", FILTER_DEFAULT);
 
-                $kostnad = filter_input("INPUT_POST", $belopp, FILTER_DEFAULT);
-                $tid = filter_input("INPUT_POST", $tid, FILTER_DEFAULT);
-                $ränta = filter_input("INPUT_POST", $ränta, FILTER_DEFAULT);
 
+            if ($belopp && $ränta && $tid) {
+                $kostnad = $belopp;
                 for ($i=0; $i < $tid; $i++) { 
                     $kostnad = $kostnad * (1 + $ränta / 100);
                 }
 
                 $kostnad = $kostnad - $belopp;
                 echo "<p>Totala lånekostnaden är $kostnad</p>";
-            }
-            
+            }    
         ?>
 </body>
 </html>

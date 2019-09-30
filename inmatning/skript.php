@@ -20,16 +20,16 @@
     
             /* skriv ut en snygg bekräftelse */
     
-            echo "<p>Hej $förnamn $efternamn tack för att du haskickat din data. <br>";
-            echo "Är dina uppgifter korrekta? <br>";
-            echo "Förnamn - $förnamn <br>";
-            echo "Efternamn - $efternamn <br>";
-            echo "Mobilnummer - $mobil <br>";
-            echo "Kön - $kön <br>";
-            echo "Favorit superhjälte - $hjälte <br>";
-            echo "Fotbollslag - $fotbollslag <br>";
-            echo "Egen kommentar <br>";
-            echo "$kommentar</p>";
+            echo "<p>Hej $förnamn $efternamn tack för att du har skickat din data.</p> <br>";
+            echo "<p>Är dina uppgifter korrekta?</p> <br>";
+            echo "<p>Förnamn - $förnamn</p> <br>";
+            echo "<p>Efternamn - $efternamn</p> <br>";
+            echo "<p>Mobilnummer - $mobil</p> <br>";
+            echo "<p>Kön - $kön</p> <br>";
+            echo "<p>Favorit superhjälte - $hjälte</p> <br>";
+            echo "<p>Fotbollslag - $fotbollslag</p> <br>";
+            echo "<p>Egen kommentar:</p> <br>";
+            echo "<p>$kommentar</p>";
         ?>
     </div>
 </body>
