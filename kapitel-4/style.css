@@ -1,21 +1,30 @@
-table{
+table {
     width: 300px;
 }
-form{
-    width: 500px;
+form {
+    width: 80%;
     margin: 30px auto;
     padding: 30px;
     display: grid;
     grid-template-columns: 1fr 2fr;
-    grid-gap: 10px;
+    grid-gap: 20px;
+    background: #FFF;
 }
-.kontainer{
-    width: 500px;
-    margin: 10% auto;
-    background: lightgray;
-    box-shadow: 1px 1px 15px #000;
-    border-radius: 5px;
+form label {
+    font-weight: bold;
 }
-table tr.grå td{
+form input[type="text"] {
+    grid-column: 2;
+}
+.kontainer {
+    width: 600px;
+    margin: 30px auto;
+    padding: 30px;
+    background: #f0f0f0;
+    border: 1px solid #DDD;
+    box-shadow: 0 0 5px #FFF;
+    border-radius: 10px;
+}
+table tr.grå td {
     background: #999;
 }
