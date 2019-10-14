@@ -8,7 +8,7 @@ form {
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-gap: 20px;
-    background: #FFF;
+    background: #fff;
 }
 form label {
     font-weight: bold;
