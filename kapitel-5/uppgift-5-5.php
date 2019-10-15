@@ -34,7 +34,11 @@
         <?php 
             $losen = filter_input(INPUT_POST, "losen", FILTER_SANITIZE_STRING);
             $poäng = 0;
-            $fel = true;
+            $vPoäng = 0;
+            $gPoäng = 0;
+            $sPoäng = 0;
+            $spPoäng = 0;
+            $lPoäng = 0;
 
             if ($losen) { 
                 /* Ska innehålla mins en stor boksatav */
@@ -42,8 +46,7 @@
                 foreach ($versaler as $tecken){
                     $pos = strpos($losen, $tecken);
                     if ($pos !== false){
-                        $poäng += 1;
-                        $fel = false;
+                        $vPoäng += 1;    
                     }
                 }
 
@@ -52,8 +55,7 @@
                 foreach ($gemener as $tecken){
                     $pos = strpos($losen, $tecken);
                     if ($pos !== false){
-                        $poäng += 1;
-                        $fel = false;
+                        $gPoäng += 1;    
                     }
                 }
                    
@@ -62,16 +64,13 @@
                 foreach ($siffror as $tecken) {
                     $pos = strpos($losen, $tecken);
                     if ($pos !== false){
-                        $poäng += 1;
-                        $fel = false;
+                        $sPoäng += 1;   
                     }
                 }
                 
-
                 /* Ska innehålla minst 8 tecken: strlen */
                 if (strlen($losen) > 8){
-                    $poäng += 1;
-                    $fel = false;
+                    $lPoäng += 1;
                 }
 
                 /* Ska innehålla minst ett specialtecken: #%&¤_*-+@!?()[]$£€ */
@@ -79,16 +78,20 @@
                 foreach ($special as $tecken){
                     $pos = strpos($losen, $tecken);
                     if ($pos !== false){
-                        $poäng += 1;
-                        $fel = false;
+                        $spPoäng += 1;
                     }
                 }
 
+                
+                echo "<p>Ditt lösenord är: $losen</p>";
+                echo "<p>Poängen är: $vPoäng + $gPoäng + $sPoäng + $lPoäng + $spPoäng</p>";
+
                 /* Skriv ut poängen */
-                if($fel){
-                    echo "<p>Ditt lösenord uppfyller inte alla kriterier.</p>";
+                if ($vPoäng == 0 or $gPoäng == 0 or $sPoäng == 0 or $spPoäng == 0 or $lPoäng == 0){
+                    echo "<p>Lösenordet uppfyller inte alla kriterier.</p>";
                 }else {
-                    echo "<p>Ditt lösenord fick $poäng poäng.</p>";
+                    $poäng = $vPoäng + $gPoäng + $sPoäng + $lPoäng + $spPoäng;
+                    echo "<p>Lösenordet fick $poäng poäng</p>"; 
                 }
             }
         ?>
