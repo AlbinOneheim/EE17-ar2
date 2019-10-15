@@ -38,7 +38,7 @@
 
             if ($losen) { 
                 /* Ska innehålla mins en stor boksatav */
-                $versaler = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "Å", "Ä", "Ö"];
+                $versaler = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W","X", "Y", "Z", "Å", "Ä", "Ö"];
                 foreach ($versaler as $tecken){
                     $pos = strpos($losen, $tecken);
                     if ($pos !== false){
