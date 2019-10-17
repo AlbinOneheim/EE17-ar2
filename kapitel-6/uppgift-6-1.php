@@ -46,16 +46,16 @@
 
             /* Första tecknet måste vara en bokstav */
             if (preg_match("/[a-z][a-z0-9\-]+.(com|net|org)$/")) {
-                echo "<p></p>";
+                echo "<p>a</p>";
             }else {
-                echo "<p></p>";
+                echo "<p>b</p>";
             }
 
             /* Domännamnet ska vara minst sex tecken och högst 200 tecken långt. */
             if (preg_match("/^[a-z][a-z0-9\-]{3,195}.(com|net|org)$/")) {
-                echo "<p></p>";
+                echo "<p>a</p>";
             }else {
-                echo "<p></p>";
+                echo "<p>b</p>";
             }
         }   
         ?>
