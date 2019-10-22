@@ -23,17 +23,22 @@
         <form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
             <label>Filnamn</label>
             <input type="text" name="filnamn" required>
-    
+
+            <label>Texten</label>
+            <textarea name="texten" id="" cols="30" rows="10" required></textarea>
+
             <button class="tertiary">Skicka</button>
         </form>
         <?php 
         $filnamn = filter_input(INPUT_POST, "filnamn", FILTER_SANITIZE_STRING);
+        $texten = filter_input(INPUT_POST, "texten", FILTER_SANITIZE_STRING);
+        
+        if ($filnamn && $texten){
 
-        if ($filnamn){
             /* Kontrollera sedan filnamnet så att det endast innehåller bokstäver, siffror och punkt */
             if (preg_match("/[a-zåäö0-9.]+/", $filnamn)) {
                 echo "<p>Filnamnet är korrket</p>";
-                echo $filnamn;
+                file_put_contents($filnamn, $texten);
             }else {
                 echo "<p>Filnamnet är INTE korrekt</p>";
             }
