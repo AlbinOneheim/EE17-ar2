@@ -13,7 +13,7 @@
         if ($lösenord != "123") {
             echo "<p>Du är utloggad</p>";
         }else {
-            echo "<p>Du är inloggad</p>";
+            echo "<p>Du är inloggadd</p>";
         }
 
         /*  Laugh on Monday, laugh for danger.
