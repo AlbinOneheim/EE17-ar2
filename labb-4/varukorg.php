@@ -15,6 +15,7 @@ include_once "./funktioner.inc.php";
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
     <link rel="stylesheet" href="style.css">
+    <script src="./shop.js" defer></script>
 </head>
 <body>
     <div class="kontainer">
@@ -42,20 +43,38 @@ if (is_readable($varukorg)) {
     /* Skriv ut som tabell */
     echo "<table>";
     echo "<thead>";
-    echo "<tr><th>Vara</th><th>Pris</th></tr>";
+    echo "<tr>
+    <th>Vara</th>
+    <th>Antal</th>
+    <th>Pris</th>
+    <th>Summa</th>
+    </tr>";
     echo "</thead>";
     echo "<tbody>";
     foreach ($rader as $rad) {
         $vara = vara($rad);
         $pris = pris($rad);
         $total = $total + $pris;
-
-
-        echo "<tr><td>$vara</td><td>$pris</td></tr>";
+        
+        echo "<tr>
+        <td>$vara</td>
+        <td>
+        <button id=\"minus\">-</button>
+        <span id=\"antal\">1</span>
+        <button id=\"plus\">+</button>
+        </td>
+        <td id=\"pris\">$pris:-</td>
+        <td id=\"summa\">$pris:-</td>
+        </tr>";
     }
     echo "</tbody>";
     echo "<tfoot>";
-    echo "<tr><td>Total</td><td>$total:-</td></tr>";
+    echo "<tr>
+    <td>Total</td>
+    <td></td>
+    <td></td>
+    <td id=\"total\">$total:-</td>
+    </tr>";
     echo "</tfoot>";
     echo "</table>";
 } else {
