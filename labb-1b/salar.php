@@ -39,10 +39,24 @@
             $bokbar = $delar[3];
 
             /* Plocka ut salsnummer och salsnamn */
-            if (strstr($salNrNamn, "/")) {
-                $delar = explode("/", $salNrNamn);
-                $salNr = $delar[0];
-                $salNamn = $delar[1];
+            if ((strstr($salNrNamn, "/") || $salNrNamn == "430" || $salNrNamn == "522" || substr($salNrNamn, 0, 1) == "A" ||
+            $salNrNamn == "Biblioteket" || $salNrNamn == "Dr Kristinas sal") && 
+            $salNrNamn != "APL" && $salNrNamn != "Annan plats") {
+                if (strstr($salNrNamn, "/")) {
+                    $delar = explode("/", $salNrNamn);
+                    $salNr = $delar[0]; // Dvs "410"
+                    $salNamn = $delar[1]; // Dvs "Dali"
+                }else {
+                    $salNr = $delar[1]; // Dvs "A1"
+                    $salNamn = "";
+                    /* Plocka ut salsnummer och salsnamn för anexet */
+                    if (strstr($salNr, "(")) { // Dvs "A1 (Mattesal)"
+                        $delar = explode(" (", $salNr);
+                        $salNr = $delar[0]; 
+                        $salNamn = substr($delar[1], 0, -1); 
+                    } 
+                }
+                
 
                 /* Om sal nummer har ett bindestreck, dela upp igen */
                 if (strstr($salNr, "-")) {
@@ -52,12 +66,22 @@
                 } else {
                     $salTyp = "sal";    
                 }
-                echo "<tr>
+                if ($bokbar == "1") {
+                    echo "<tr>
             <td>$salNr</td>
             <td>$salNamn</td>
             <td>$salTyp</td>
-            <td>$bokbar</td>
+            <td class=\"grön\"></td>
             </tr>";
+                }else {
+                    echo "<tr>
+            <td>$salNr</td>
+            <td>$salNamn</td>
+            <td>$salTyp</td>
+            <td class=\"röd\"></td>
+            </tr>";
+                }
+                
             } 
         }
     }else {
