@@ -36,7 +36,6 @@ foreach ($filer as $fil) {
         $pris = pris($fil);
         echo "$vara $pris:-";
         echo "</label>";
-      
     }
 
 }
