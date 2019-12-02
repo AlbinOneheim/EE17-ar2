@@ -1,7 +1,7 @@
 <?php
 /*
 * PHP version 7
-* @category   Blogg med fillagring
+* @category   Logga in
 * @author     Karim Ryde <karye.webb@gmail.com>
 * @license    PHP CC
 */
@@ -24,31 +24,16 @@ if (!$_SESSION['login']) {
         <h1 class="display-4">Bloggen</h1>
         <nav>
             <ul class="nav">
-                <li class="nav-item"><a class="nav-link active" href="./lasa.php">Läsa</a></li>
+                <li class="nav-item"><a class="nav-link" href="./lasa.php">Läsa</a></li>
                 <li class="nav-item"><a class="nav-link" href="./skriva.php">Skriva</a></li>
-                <?php
-                if(!$_SESSION['login']){
-                    echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"./login.php\">Logga in</a></li>";
-                }else {
-                    echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"./logout.php\">Logga ut</a></li>";
-                }
-                ?>
+                <li class="nav-item"><a class="nav-link" href="./login.php">Logga in</a></li>
             </ul>
         </nav>
-        <form action="<?php echo $_SERVER['PHP_SELF'];?>">
         <?php
-        $filnamn = "blogg.txt";
-        if (is_readable($filnamn)) {
-            $texten = file($filnamn);
-            $texten = array_reverse($texten);
-            foreach ($texten as $rad) {
-                echo "<p>$rad</p>";
-            }
-        }else {
-            echo "<p>Texten kan inte läsas!</p>";
-        }
+        $_SESSION['login'] = false;
+        echo "<p>Nu är du utloggad!</p>";
         ?>
-        </form>
     </div>
+    </form>
 </body>
 </html>
