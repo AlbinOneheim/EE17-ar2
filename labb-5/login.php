@@ -24,12 +24,32 @@ if (!$_SESSION['login']) {
         
 
         $anamn = filter_input(INPUT_POST, "anamn", FILTER_SANITIZE_STRING);
-        $lösen = filter_input(INPUT_POST, "lösen", FILTER_SANITIZE_STRING);
+        $losen = filter_input(INPUT_POST, "losen", FILTER_SANITIZE_STRING);
 
         /* kolla om användarnamn och lösenord stämmer */
-        if ($anamn == "Albin" and $lösen == "123") {
-            $_SESSION['login'] = true;
-        }
+        if ($anamn && $losen) {
+            $anamn = trim($anamn);
+            $losen = trim($losen);
+
+            $anamn = strtolower($anamn);
+            $losen = strtolower($losen);
+
+            $rader = file("info.txt") or die("Kunde inte öppna textfilen");
+            foreach ($rader as $rad) {
+
+                $delar = explode(" ", $rad);
+                $anamnFil = $delar[0];
+                $hashFil = trim($delar[1]);
+
+                if ($anamn == $anamnFil) {
+                    if (password_verify($losen, $hashFil)) {
+                        $_SESSION['login'] = true;
+                    }
+                }
+            }
+
+            
+    }
         ?>
     <div class="kontainer">
         <h1 class="display-4">Bloggen</h1>
@@ -54,12 +74,12 @@ if (!$_SESSION['login']) {
            
         }
         ?>
-        <form action="#" method="POST">
+        <form action="./login.php" method="POST">
         <h2>Logga in</h2><br>
         <label>Användarnamn</label>
         <input type="text" name="anamn" placeholder="Användarnamn" required>
         <label>Lösenord</label>
-        <input type="password" name="lösen" placeholder="Lösenord" required>
+        <input type="password" name="losen" placeholder="Lösenord" required>
         
         <button class="tertiary">Logga in</button>
         </form>
