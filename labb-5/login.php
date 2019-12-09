@@ -70,8 +70,6 @@ if (!$_SESSION['login']) {
         $fran = filter_input(INPUT_GET, "fran", FILTER_SANITIZE_STRING);
         if ($fran == "skriva") {
             echo "<p class=\"alert alert-info\">För att skriva inlägg måste du logga in!</p>";
-        } else {
-           
         }
         ?>
         <form action="./login.php" method="POST">
