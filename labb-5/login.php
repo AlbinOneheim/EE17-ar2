@@ -6,8 +6,8 @@
 * @license    PHP CC
 */
 session_start();
-if (!$_SESSION['login']) {
-    $_SESSION['login'] = false;
+if (!isset($_SESSION['login'])) {
+    
 }
 ?>
 <!DOCTYPE html>
@@ -58,7 +58,7 @@ if (!$_SESSION['login']) {
                 <li class="nav-item"><a class="nav-link" href="./lasa.php">Läsa</a></li>
                 <li class="nav-item"><a class="nav-link" href="./skriva.php">Skriva</a></li>
                 <?php
-                if(!$_SESSION['login']){
+                if(!isset($_SESSION['login'])){
                     echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"./login.php\">Logga in</a></li>";
                 }else {
                     echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"./logout.php\">Logga ut</a></li>";
@@ -82,7 +82,7 @@ if (!$_SESSION['login']) {
         <button class="tertiary">Logga in</button>
         </form>
         <?php
-        if ($_SESSION['login']){
+        if (isset($_SESSION['login'])){
             echo "<p class=\"alert alert-success\">Du är inloggaD!</p>";
         }else {
             echo "<p class=\"alert alert-warning\">Fel användarnamn eller lösenord</p>"; 

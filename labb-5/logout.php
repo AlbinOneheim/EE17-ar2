@@ -6,7 +6,7 @@
 * @license    PHP CC
 */
 session_start();
-if (!$_SESSION['login']) {
+if (!isset($_SESSION['login'])) {
     $_SESSION['login'] = false;
 }
 ?>
@@ -30,7 +30,7 @@ if (!$_SESSION['login']) {
             </ul>
         </nav>
         <?php
-        $_SESSION['login'] = false;
+        session_destroy();
         echo "<p>Nu är du utloggad!</p>";
         ?>
     </div>

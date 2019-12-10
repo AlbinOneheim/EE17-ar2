@@ -7,9 +7,8 @@
 */
 session_start();
 /* Ä användaren inte inloggad */
-if (!$_SESSION['login']) {
+if (!isset($_SESSION['login'])) {
     /* Nej, gå till login sidan */
-        $_SESSION['login'] = false;
    header("Location: ./login.php?fran=skriva"); 
 }
 
@@ -31,7 +30,7 @@ if (!$_SESSION['login']) {
                 <li class="nav-item"><a class="nav-link active" href="./lasa.php">Läsa</a></li>
                 <li class="nav-item"><a class="nav-link" href="./skriva.php">Skriva</a></li>
                 <?php
-                if(!$_SESSION['login']){
+                if(!isset($_SESSION['login'])){
                     echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"./login.php\">Logga in</a></li>";
                 }else {
                     echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"./logout.php\">Logga ut</a></li>";

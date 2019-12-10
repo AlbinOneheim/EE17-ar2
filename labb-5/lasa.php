@@ -5,10 +5,6 @@
 * @author     Karim Ryde <karye.webb@gmail.com>
 * @license    PHP CC
 */
-session_start();
-if (!$_SESSION['login']) {
-    $_SESSION['login'] = false;
-}
 ?>
 <!DOCTYPE html>
 <html lang="sv">
@@ -27,10 +23,10 @@ if (!$_SESSION['login']) {
                 <li class="nav-item"><a class="nav-link active" href="./lasa.php">Läsa</a></li>
                 <li class="nav-item"><a class="nav-link" href="./skriva.php">Skriva</a></li>
                 <?php
-                if(!$_SESSION['login']){
-                    echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"./login.php\">Logga in</a></li>";
-                }else {
+                if(isset($_SESSION['login'])){
                     echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"./logout.php\">Logga ut</a></li>";
+                }else {
+                    echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"./login.php\">Logga in</a></li>";
                 }
                 ?>
             </ul>
