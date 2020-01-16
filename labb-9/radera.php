@@ -29,10 +29,46 @@ include_once "./konfig-db.php";
         <main>
             <?php
             $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING);
+            $radera = filter_input(INPUT_POST, "radera", FILTER_SANITIZE_STRING);
 
-            if ($id) {
-                echo "<p>Inlägg Nummer $id</p>";
+            $conn = new mysqli($host, $användare, $lösenord, $databas);
+            if ($conn->connect_error) {
+                die("Kunde inte ansluta till databasen: " . $conn->connect_error);
             }
+
+            if ($id && !$radera) {
+                echo "<p>Inlägg Nummer $id</p>";
+
+                $query = "SELECT * FROM blogg WHERE id = '$id'";
+                $result = $conn->query($query);
+
+                if (!$result) {
+                    die("Något blev fel med SQL-statsen.");
+                }else {
+                $rad = $result->fetch_assoc();
+                echo "<form action=\"#\" method=\"POST\">";
+                echo "<div class=\"inlagg\">";
+                echo "<h5>{$rad['datum']}</h5>";
+                echo "<h6>{$rad['rubrik']}</h6>";
+                echo "<p>{$rad['inlagg']}</p>"; 
+                echo "</div>";
+                echo "<button class=\"btn btn-danger\" name=\"radera\" value=\"1\">Radera inlägg!</button>";
+                echo "</form>";
+                } 
+               
+            }
+            if ($id && $radera) {
+                $sql = "DELETE FROM blogg WHERE id = '$id'";
+                $result = $conn->query($sql);
+
+                if (!$result) {
+                    die("Något blev fel med SQL-statsen.");
+                }else {
+                    echo "<p class=\"alert alert-info\">Inlägg $id har raderats!</p>";
+                }
+            }
+
+            $conn->close();
             ?>
         </main>
     </div>

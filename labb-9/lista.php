@@ -49,7 +49,7 @@ include_once "./konfig-db.php";
                 <td>$rad[datum]</td>
                 <td>$rad[rubrik]</td>
                 <td>$rad[inlagg]</td>
-                <td><a href=\"\"><i class=\"fa fa-edit\"></i></a>
+                <td><a href=\"redigera.php?id=$rad[id]\"><i class=\"fa fa-edit\"></i></a>
                 <a href=\"radera.php?id=$rad[id]\"><i class=\"fa fa-trash-o\"></i></a>
                 </td>
                 </tr>";  
