@@ -22,8 +22,8 @@ include_once "./konfig-db.php";
         <nav>
             <ul class="nav nav-tabs">
                 <li class="nav-item"><a class="nav-link active" href="./lasa.php">Läsa</a></li>
-                <li class="nav-item"><a class="nav-link" href="./skriva.php">Skriva</a></li>
-                <li class="nav-item"><a class="nav-link" href="./lista.php">Admin</a></li>
+                <li class="nav-item"><a class="nav-link" href="./sok.php">Sök</a></li>
+                <li class="nav-item"><a class="nav-link" href="./admin/admin.php">Admin</a></li>
             </ul>
         </nav>
         <div class="jumbotron">
@@ -36,14 +36,14 @@ include_once "./konfig-db.php";
             die("Kunde inte ansluta till databasen: " . $conn->connect_error);
         }
         /* 2. SQL? */
-        $query = "SELECT * FROM blogg";
+        $query = "SELECT * FROM blogg ORDER BY id DESC";
         $result = $conn->query($query);
 
         /* Gick det bra? */
         if (!$result) {
             die("Något blev fel med SQL-statsen.");
         }
-
+        
         /* 3. Bearbeta svaret från databasen */
         while ($rad = $result->fetch_assoc()) {
             echo "<div class=\"inlagg\">";
