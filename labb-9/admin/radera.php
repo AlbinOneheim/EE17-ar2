@@ -5,7 +5,7 @@
 * @author     Karim Ryde <karye.webb@gmail.com>
 * @license    PHP CC
 */
-include_once "../konfig-db.php";
+include_once "konfig-db.php";
 ?>
 <!DOCTYPE html>
 <html lang="sv">
