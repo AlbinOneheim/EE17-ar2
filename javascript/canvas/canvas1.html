@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Canvas grunder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="canvas">
+        Sorry, your browser does not support the canvas tag.
+    </canvas>
+    <script>
+        /* element vi använder */
+        const eCanvas = document.querySelector("#canvas");
+
+        /* Ställ in bredd och höjd till samma som CSS */
+        eCanvas.width = eCanvas.scrollWidth;
+        eCanvas.height = eCanvas.scrollHeight;
+
+        /* Slå på ritmotorn */
+        var ctx = eCanvas.getContext("2d");
+
+        ctx.fillStyle = "limegreen";
+        ctx.fillRect(10, 10, 100, 100);
+
+        ctx.strokeStyle = "red";
+        ctx.strokeRect(250, 10, 100, 100);
+
+        /* Testa att rita cirklar */
+        ctx.fillStyle = "blue";
+        ctx.beginPath();
+        ctx.arc(500, 60, 50, 0, Math.PI * 2);
+        ctx.fill(); 
+
+        ctx.strokeStyle = "purple";
+        ctx.beginPath();
+        ctx.arc(700, 60, 50, 0, Math.PI * 2);
+        ctx.stroke(); 
+
+        ctx.fillStyle = "pink";
+        ctx.beginPath();
+        ctx.arc(60, 200, 50, 0, Math.PI);
+        ctx.fill(); 
+
+        ctx.fillStyle = "grey";
+        ctx.beginPath();
+        ctx.arc(200, 200, 50, 0, Math.PI / 2);
+        ctx.lineTo(200, 200);
+        ctx.fill(); 
+
+        
+        </script>
+</body>
+</html>

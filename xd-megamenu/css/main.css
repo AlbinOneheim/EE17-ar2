@@ -46,12 +46,17 @@ nav {
   width: calc(100% - 4em);
   height: calc(100vh - 4em);
   display: none;
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+  -webkit-transform-origin: right;
+          transform-origin: right;
 }
 
 nav .close-btn {
   width: 18px;
   float: right;
   cursor: pointer;
+  opacity: 0;
 }
 
 nav ul {
@@ -78,7 +83,168 @@ nav ul span {
   margin-top: 20px;
 }
 
+nav ul li {
+  opacity: 0;
+}
+
 .show-menu {
   display: block;
+  -webkit-animation: slide-menu 1s ease-in forwards;
+          animation: slide-menu 1s ease-in forwards;
+}
+
+.show-menu .close-btn {
+  -webkit-animation: show-x 1s 1s forwards;
+          animation: show-x 1s 1s forwards;
+}
+
+.show-menu li:nth-of-type(1) {
+  -webkit-animation: menu-item-anim .6s forwards 1s ease-in-out;
+          animation: menu-item-anim .6s forwards 1s ease-in-out;
+}
+
+.show-menu li:nth-of-type(2) {
+  -webkit-animation: menu-item-anim .6s forwards 1.2s ease-in-out;
+          animation: menu-item-anim .6s forwards 1.2s ease-in-out;
+}
+
+.show-menu li:nth-of-type(3) {
+  -webkit-animation: menu-item-anim .6s forwards 1.4s ease-in-out;
+          animation: menu-item-anim .6s forwards 1.4s ease-in-out;
+}
+
+.show-menu li:nth-of-type(4) {
+  -webkit-animation: menu-item-anim .6s forwards 1.6s ease-in-out;
+          animation: menu-item-anim .6s forwards 1.6s ease-in-out;
+}
+
+@-webkit-keyframes slide-menu {
+  from {
+    -webkit-transform: scaleX(0);
+            transform: scaleX(0);
+  }
+  to {
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+  }
+}
+
+@keyframes slide-menu {
+  from {
+    -webkit-transform: scaleX(0);
+            transform: scaleX(0);
+  }
+  to {
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+  }
+}
+
+@-webkit-keyframes show-x {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes show-x {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes menu-item-anim {
+  0% {
+    opacity: 1;
+    -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  4.3% {
+    -webkit-transform: matrix3d(-0.996, -0.09, 0, 0, 0.09, -0.996, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(-0.996, -0.09, 0, 0, 0.09, -0.996, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  8.61% {
+    -webkit-transform: matrix3d(0.723, -0.691, 0, 0, 0.691, 0.723, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0.723, -0.691, 0, 0, 0.691, 0.723, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  12.91% {
+    -webkit-transform: matrix3d(0.947, 0.323, 0, 0, -0.323, 0.947, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0.947, 0.323, 0, 0, -0.323, 0.947, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  17.22% {
+    -webkit-transform: matrix3d(0.833, 0.553, 0, 0, -0.553, 0.833, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0.833, 0.553, 0, 0, -0.553, 0.833, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  28.33% {
+    -webkit-transform: matrix3d(0.992, 0.129, 0, 0, -0.129, 0.992, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0.992, 0.129, 0, 0, -0.129, 0.992, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  39.44% {
+    -webkit-transform: matrix3d(0.999, -0.039, 0, 0, 0.039, 0.999, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0.999, -0.039, 0, 0, 0.039, 0.999, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  61.66% {
+    -webkit-transform: matrix3d(1, 0.003, 0, 0, -0.003, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(1, 0.003, 0, 0, -0.003, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  83.98% {
+    -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+}
+
+@keyframes menu-item-anim {
+  0% {
+    opacity: 1;
+    -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  4.3% {
+    -webkit-transform: matrix3d(-0.996, -0.09, 0, 0, 0.09, -0.996, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(-0.996, -0.09, 0, 0, 0.09, -0.996, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  8.61% {
+    -webkit-transform: matrix3d(0.723, -0.691, 0, 0, 0.691, 0.723, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0.723, -0.691, 0, 0, 0.691, 0.723, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  12.91% {
+    -webkit-transform: matrix3d(0.947, 0.323, 0, 0, -0.323, 0.947, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0.947, 0.323, 0, 0, -0.323, 0.947, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  17.22% {
+    -webkit-transform: matrix3d(0.833, 0.553, 0, 0, -0.553, 0.833, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0.833, 0.553, 0, 0, -0.553, 0.833, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  28.33% {
+    -webkit-transform: matrix3d(0.992, 0.129, 0, 0, -0.129, 0.992, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0.992, 0.129, 0, 0, -0.129, 0.992, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  39.44% {
+    -webkit-transform: matrix3d(0.999, -0.039, 0, 0, 0.039, 0.999, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0.999, -0.039, 0, 0, 0.039, 0.999, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  61.66% {
+    -webkit-transform: matrix3d(1, 0.003, 0, 0, -0.003, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(1, 0.003, 0, 0, -0.003, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  83.98% {
+    -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
 }
 /*# sourceMappingURL=main.css.map */
