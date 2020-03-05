@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Canvas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas></canvas>
+    <script>
+        /* Element vi arbeter med */
+        const eCanvas = document.querySelector("canvas");
+
+        /* Ställ in bredd och storlek = fullscreen */
+        eCanvas.width = 600;
+        eCanvas.height = 500;
+
+        /* Väljer rit-api */
+        var ctx = eCanvas.getContext("2d");
+        
+        /* Slumpa fram en färg */
+        function slumpFärg() {
+            var r = Math.ceil(Math.random() * 255);    
+            var g = Math.ceil(Math.random() * 255);    
+            var b = Math.ceil(Math.random() * 255);   
+
+            var färg = "rgb(" + r + ", " + g + ", " + b + ")";
+            return färg; 
+        }
+        slumpFärg();
+
+        /* Globala variabler */
+        var dvdX = Math.ceil(Math.random() * 500),  // Figurens-X position
+            dvdY = Math.ceil(Math.random() * 500),  // Figurens-Y position
+            dx = Math.ceil(Math.random() * 5),       // Förflyttningen x-led
+            dy = Math.ceil(Math.random() * 5);       // Förflyttningen i y-led
+            
+        var dvd = new Image();
+
+        /* Innan spelet börjar ladda alla bilder */
+        function setup() {
+            dvd.src = "./bilder/dvd.png";
+
+            window.requestAnimationFrame(gameLoop);  
+        }
+
+        /* Här lägger vi allt som animeras */
+        function gameLoop() {
+            /* Sudda ut canvas */
+            ctx.clearRect(0, 0, 600, 500);
+
+            /* Rita ut en figur */
+            ctx.drawImage(dvd, dvdX, dvdY, 50, 50);
+
+            /* Öka på x */
+            dvdX += dx;
+            dvdY += dy;
+
+            /* Vad händer vid kanterna */
+            /* Nedre kanten */
+            if ((dvdY + 50) > 500 || (dvdY) < 0) {
+                /* Byt riktning på y-led */
+                dy = -dy;
+                document.body.style.backgroundColor = slumpFärg();
+            }
+
+            /* Högra kanten */
+            if ((dvdX + 50) > 600 || (dvdX) < 0) {
+                /* Byt riktning på x-led */
+                dx = -dx;
+                document.body.style.backgroundColor = slumpFärg();
+            }
+
+            /* Upprepa loopen */
+            window.requestAnimationFrame(gameLoop);
+        }
+
+        /* Kör igång spelet */
+        setup();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Canvas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas></canvas>
+    <script>
+        /* Element vi arbeter med */
+        const eCanvas = document.querySelector("canvas");
+
+        /* Ställ in bredd och storlek = fullscreen */
+        eCanvas.width = 600;
+        eCanvas.height = 500;
+
+        /* Globala variabler */
+        var ctx = eCanvas.getContext("2d");
+        var karim = {
+            x     : 300,
+            y     : 250,
+            dx    : 10,
+            dy    : 10,
+            right : false,
+            left  : false,
+            up    : false,
+            down  : false
+
+        };
+
+        var image = new Image();
+        image.src = "./bilder/karimF.jpg";
+        
+        /* Lyssna på tangenterna */
+        window.addEventListener("keydown", knappIn);
+        function knappIn(e) {
+            console.log("e.key", e.key);
+            if (e.key == "d") {
+                karim.right = true;
+            }
+            if (e.key == "a") {
+                karim.left = true;
+            }
+            if (e.key == "w") {
+                karim.up = true;
+            }
+            if (e.key == "s") {
+                karim.down = true;
+            }
+            
+        }
+        window.addEventListener("keyup", knappUt);
+        function knappUt(e) {
+            console.log("e.key", e.key);
+            if (e.key == "d") {
+                karim.right = false;
+            }
+            if (e.key == "a") {
+                karim.left = false;
+            }
+            if (e.key == "w") {
+                karim.up = false;
+            }
+            if (e.key == "s") {
+                karim.down = false;
+            }
+            
+        }
+
+        /* Loopen */
+        function animate() {
+            /* Tömma skärmen */
+            ctx.clearRect(0, 0, 600, 500);
+
+            /* Räkna ut kordinatera */
+            if (karim.right) {
+                karim.x += karim.dx;
+            }
+            if (karim.left) {
+                karim.x -= karim.dx;
+            }
+
+            if (karim.down) {
+                karim.y += karim.dy;
+            }
+            if (karim.up) {
+                karim.y -= karim.dy;
+            }
+
+            
+
+
+            /* Inte ramla utanför canvas */
+            /* Åker Karim ut ur nederkant, dyk upp från ovankant */
+            if (karim.y > 525) {
+                karim.y = -25;
+            }else if (karim.y < -25){
+                karim.y = 525;
+            }
+
+            if (karim.x > 625) {
+                karim.x = -25;
+            }else if (karim.x < -25) {
+                karim.x = 625;
+            }
+
+            /* Rita ut Karim */
+            ctx.drawImage(image, karim.x - 25, karim.y - 25, 50, 50);
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>

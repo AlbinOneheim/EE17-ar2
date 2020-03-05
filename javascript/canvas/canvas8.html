@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Canvas</title>
+    <link rel="stylesheet" href="canvas8.css">
+</head>
+<body>
+    <canvas></canvas>
+    <script>
+        /* Element vi arbeter med */
+        const eCanvas = document.querySelector("canvas");
+
+        /* Ställ in bredd och storlek = fullscreen */
+        eCanvas.width = 600;
+        eCanvas.height = 500;
+
+        /* Globala variabler */
+        var ctx = eCanvas.getContext("2d");
+        var karim = {
+            x: 300,
+            y: 250,
+            dx: 0,
+            dy: 0,
+            a: 0,
+            s: 0,
+            da: 0,
+            cw: false,
+            ccw: false,
+            gas: false
+        };
+
+        var stop = false;
+
+        var image = new Image();
+        image.src = "./bilder/karimF.jpg";
+
+        /* Lyssna på tangenterna */
+        window.addEventListener("keydown", knappIn);
+        function knappIn(e) {
+            console.log("e.key", e.key);
+            if (e.key == "d") {
+                karim.cw = true;
+            }
+            if (e.key == "a") {
+                karim.ccw = true;
+            }
+            if (e.key == " ") {
+                karim.gas = true;
+            }
+
+        }
+        window.addEventListener("keyup", knappUt);
+        function knappUt(e) {
+            console.log("e.key", e.key);
+            if (e.key == "d") {
+                karim.cw = false;
+            }
+            if (e.key == "a") {
+                karim.ccw = false;
+            }
+            if (e.key == " ") {
+                karim.gas = false;
+            }
+        }
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "#fff";
+        /* Loopen */
+        function animate() {
+            /* Tömma skärmen */
+            ctx.clearRect(0, 0, 600, 500);
+
+            /* Visa em panel */
+            ctx.fillText("Y: " + (445.3 - karim.y).toFixed(1), 400, 20);
+            ctx.fillText("Speed: " + Math.abs(karim.dy.toFixed(1)), 500, 20);
+
+            /* Inte ramla utanför canvas */
+            /* Åker Karim ut ur nederkant, dyk upp från ovankant */
+            if (karim.y >= 445) {
+                karim.y = 445;
+                
+
+                /* Kollar om man kraschar */
+                if (karim.dy < 0,2) {
+                    ctx.fillText("The Karim has landed!", 400, 50);
+                } else {
+                    ctx.fillText("Disaster", 400, 50);
+                }
+                karim.dy = 0;
+                stop = true;
+            } else if (karim.y < -25) {
+                karim.y = -25;
+            }
+
+            if (karim.x > 625) {
+                karim.x = -25;
+            } else if (karim.x < -25) {
+                karim.x = 625;
+            }
+
+            /* Rotera Karim */
+            if (karim.cw) {
+                karim.da += 0.001;
+            } else if (karim.ccw) {
+                karim.da -= 0.001;
+            } else if (karim.gas) {
+                karim.s += 0.0002;
+                karim.dx += Math.sin(karim.a) * karim.s;
+                karim.dy -= Math.cos(karim.a) * karim.s;
+            }
+            
+            karim.a += karim.da;
+            karim.x += karim.dx;
+            karim.y += karim.dy;
+
+            /* Gravitationesn kraft på Karim */
+            karim.dy += 0.005;
+
+            /* Rita ut Karim */
+            ctx.save();
+            ctx.translate(karim.x, karim.y);
+            ctx.rotate(karim.a);
+            if (karim.gas) {
+                ctx.beginPath();
+                ctx.fillStyle = "lightblue";
+                ctx.lineTo(-10, 0);
+                ctx.lineTo(10, 0);
+                ctx.lineTo(0, 70);
+                ctx.closePath();
+                ctx.fill();
+                }
+            ctx.drawImage(image, -25, -25, 50, 50);
+            ctx.restore();
+
+            /* Avbryt loopen */
+            if (stop) {
+                return;
+            }
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>
