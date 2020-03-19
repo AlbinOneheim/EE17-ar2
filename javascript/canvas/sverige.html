@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Canvas grunder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="canvas">
+        Sorry, your browser does not support the canvas tag.
+    </canvas>
+    <script>
+        /* element vi använder */
+        const eCanvas = document.querySelector("#canvas");
+
+        /* Ställ in bredd och höjd till samma som CSS */
+        eCanvas.width = eCanvas.scrollWidth;
+        eCanvas.height = eCanvas.scrollHeight;
+
+        /* Slå på ritmotorn */
+        var ctx = eCanvas.getContext("2d");
+
+        /* Svenska flaggan */
+        ctx.fillStyle = "darkblue";
+        ctx.fillRect(150, 150, 500, 300);
+        ctx.fillStyle = "yellow";
+        ctx.fillRect(300, 150, 50, 300);
+        ctx.fillRect(150, 280, 500, 50);
+
+
+        </script>
+</body>
+</html>

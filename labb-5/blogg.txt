@@ -3,3 +3,5 @@ Hej
 2019-11-26
 asd 
 2019-11-26
+Nu har vi skyddat mappen med hjälp av .htaccess 
+2019-12-02

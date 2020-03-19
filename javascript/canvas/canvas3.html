@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Canvas grunder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="canvas">
+        Sorry, your browser does not support the canvas tag.
+    </canvas>
+    <script>
+        /* element vi använder */
+        const eCanvas = document.querySelector("#canvas");
+
+        /* Ställ in bredd och höjd till samma som CSS */
+        eCanvas.width = eCanvas.scrollWidth;
+        eCanvas.height = eCanvas.scrollHeight;
+
+        /* Slå på ritmotorn */
+        var ctx = eCanvas.getContext("2d");
+
+        
+        /* Skapa en bild behållare */
+        var image = new Image();
+        /* Lyssna på när bilden laddats klart, då rita */
+        image.src = "./bilder/1-2-penguin-transparent.png";
+        image.addEventListener("load", function() {
+            ctx.drawImage(image, 200, 100, 300, 300);
+        });
+        
+        </script>
+</body>
+</html>

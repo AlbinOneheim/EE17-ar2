@@ -1,3 +1,18 @@
+<?php
+/*
+* PHP version 7
+* @category   Skriv en text som sparas i textfil
+* @author     Karim Ryde <karye.webb@gmail.com>
+* @license    PHP CC
+*/
+session_start();
+/* Ä användaren inte inloggad */
+if (!isset($_SESSION['login'])) {
+    /* Nej, gå till login sidan */
+   header("Location: ./login.php?fran=skriva"); 
+}
+
+?>
 <!DOCTYPE html>
 <html lang="sv">
 <head>
@@ -14,6 +29,13 @@
             <ul class="nav">
                 <li class="nav-item"><a class="nav-link active" href="./lasa.php">Läsa</a></li>
                 <li class="nav-item"><a class="nav-link" href="./skriva.php">Skriva</a></li>
+                <?php
+                if(!isset($_SESSION['login'])){
+                    echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"./login.php\">Logga in</a></li>";
+                }else {
+                    echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"./logout.php\">Logga ut</a></li>";
+                }
+                ?>
             </ul>
         </nav>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">

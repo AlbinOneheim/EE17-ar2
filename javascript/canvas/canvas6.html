@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Canvas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas></canvas>
+    <script>
+        /* Element vi arbeter med */
+        const eCanvas = document.querySelector("canvas");
+
+        /* Ställ in bredd och storlek = fullscreen */
+        eCanvas.width = 600;
+        eCanvas.height = 500;
+
+        /* Globala variabler */
+        var ctx = eCanvas.getContext("2d");
+        var boll = {
+            x : 200,
+            y : 200,
+            dx : 1,
+            dy : 1
+        };
+
+        function slumpFärg() {
+            var r = Math.ceil(Math.random() * 255);    
+            var g = Math.ceil(Math.random() * 255);    
+            var b = Math.ceil(Math.random() * 255);   
+
+            var färg = "rgb(" + r + ", " + g + ", " + b + ")";
+            return färg; 
+        }
+        
+        
+
+        /* Rita flera cirklar */
+        //for (var i = 0; i < 200; i++) {
+           //var x = Math.ceil(Math.random() * 600);
+           //var y = Math.ceil(Math.random() * 500);
+           //ctx.strokeStyle = slumpFärg();
+            /* Rita en cirkel */
+            //ctx.beginPath();
+            //ctx.arc(200, 200, 30, 0, Math.PI * 2);
+            //ctx.stroke();
+        //} 
+
+        /* Rita en boll */
+        function ritaBoll() {
+            ctx.strokeStyle = slumpFärg();
+            ctx.beginPath();
+            ctx.arc(boll.x, boll.y, 30, 0, Math.PI * 2);
+            ctx.stroke();
+        }
+        boll.x =  Math.ceil(Math.random() * 500 + 50);
+        boll.y =  Math.ceil(Math.random() * 400 + 50);
+        boll.dx = Math.ceil(Math.random() * 10);
+        boll.dy = Math.ceil(Math.random() * 10);
+        /* Animations-loopen */
+        function animate() {
+            /* Tömma skärmen */
+            //ctx.clearRect(0, 0, 600, 500);
+
+            /* Rita bollen */
+            
+            ritaBoll();
+
+            /* Ändra x-kordinaten */
+
+            /* Studsa tillbaka från högerkanten */
+            if (boll.x > 570 || boll.x < 30) {
+                boll.dx = -boll.dx;
+            }
+           
+           /* Studsa tillbaka från vänsterkanten */
+            if (boll.y > 470 || boll.y < 30){
+                boll.dy = -boll.dy;
+            }
+            boll.x += boll.dx;
+            boll.y += boll.dy;
+            requestAnimationFrame(animate)
+        }
+        animate();
+    </script>
+</body>
+</html>
