@@ -14,6 +14,8 @@
             <h1>Pong</h1>
             <button id="start" class="btn btn-light">Start</button>
             <button id="stop" class="btn btn-secondary">Stop</button>
+            <h4>Poäng: <span id="poäng">0</span></h4>
+            <h4>Highscore</h4>
         </div>
     </div>
     <script>
@@ -21,6 +23,7 @@
         const Canvas = document.querySelector("canvas");
         const knappStart = document.querySelector("#start");
         const knappStop = document.querySelector("#stop");
+        const ePoäng = document.querySelector("#poäng");
 
         /* Ställ in bredd och storlek = fullscreen */
         Canvas.width = 600;
@@ -45,9 +48,12 @@
             höjd : 80
         }
 
-        var poäng = 1;
-
+        var poäng = 0;
         var startFlagga = false;
+
+        studs = new Audio("./studs.wav");
+        smash = new Audio("./smash.wav");
+        
 
           /* Starta spelet när vi trycker på knappen */
           knappStart.addEventListener("click", function () {
@@ -106,6 +112,13 @@
             ctx.fill();
         }
 
+         /* Game Over */
+         function gameOver() {
+            ctx.beginPath();
+            ctx.font = "50px Sans serif";
+            ctx.fillStyle = "#fff";
+            ctx.fillText("Game Over!", 190, 150);
+        }
 
         /* Ritar en racket */
         function ritaRacket() {
@@ -123,7 +136,7 @@
 
             /* Rita racketen */
             ritaRacket();
-
+ 
             /* Flytta racketen */
             if (racket.ned) {
                 if (racket.y < 500 - racket.höjd) {
@@ -131,7 +144,7 @@
                 }
             }
 
-            if (racket.upp) {
+            if (racket.upp) {  
                 if (racket.y > 0) {
                     racket.y -= 5;
                 }
@@ -140,30 +153,34 @@
             /* Bollen ska studsa på racketen */
             if (boll.y >= racket.y && boll.y <= racket.y + racket.höjd) {
                 if ((boll.x - boll.radie) <= racket.x + racket.bredd) {
-                    console.log("Träff!", poäng);
-                    
                     boll.dx = -boll.dx;
+                    poäng ++;
+                    ePoäng.textContent = poäng;
+                    smash.play();
+
+                    /* Öka hastigheten / svårhetsgrad */
                     boll.dx ++;
                     boll.dy ++;
-                    poäng ++;
                     
                 }
             }
 
             /* Bollen träffar väggen backom racketecn = Game Over! */
             if (boll.x <= 0) {
-                ctx.font = "30px Arial";
-                ctx.fillText("Game Over!", 230, 100);
+                gameOver();
+                startFlagga = false;
             }
 
             /* Studsa tillbaka från högerkanten */
             if (boll.x > 600 - boll.radie) {
                 boll.dx = -boll.dx;
+                studs.play();
             }
            
            /* Studsa tillbaka från vänsterkanten */
             if (boll.y < boll.radie || boll.y > 500 - boll.radie){
                 boll.dy = -boll.dy;
+                studs.play();
             }
             boll.x += boll.dx;
             boll.y += boll.dy;
@@ -171,7 +188,7 @@
 
             /* Här kan vi pausa spelet */
             if (startFlagga) {
-                requestAnimationFrame(animate)
+                requestAnimationFrame(animate);
             }
             
         }
