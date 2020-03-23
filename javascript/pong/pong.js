@@ -31,6 +31,9 @@ var racket = {
 var startFlagga = false;
 var poäng = 0;
 
+/* Hämta highscore från databasen */
+lasahighscore();
+
 /* Skapa ljudobjekt */
 studs = new Audio("./studs.wav");
 smash = new Audio("./smash.wav");
@@ -223,5 +226,17 @@ function sparaPoäng() {
     ajax.addEventListener("loadend", function () {
         console.log("Tar emot svar=", this.responseText);
         
+    });
+}
+
+/* Hämta highscore, dvs 5 högsta poängen */
+function lasahighscore() {
+    var ajax = new XMLHttpRequest();
+
+    ajax.open("POST", "./lasa-highscore.php");
+    ajax.send();
+
+    ajax.addEventListener("loadend", function () {
+        eHighscore.innerHTML = this.responseText;
     });
 }
