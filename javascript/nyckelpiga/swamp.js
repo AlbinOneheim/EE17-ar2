@@ -114,37 +114,41 @@ function ritaMonster3() {
 /* Kolla om pigan träffas av monstret */
 function krock() {
     /* Om monster krockar med piggan */
-    if ((piga.rad * 50) < monster.x && monster.x < (piga.rad * 50 + 50)) {
+    if ((piga.rad * 50) < monster.y && monster.y < (piga.rad * 50 + 50)) {
         if ((piga.kol * 50) < monster.x && monster.x < (piga.kol * 50 + 50)) {
             ctx.fillStyle = "#999";
             ctx.fillRect(0, 0, 800, 600);
             ctx.fillStyle = "red";
             ctx.fillText("Game Over!", 400, 300);
             gameOver = true;
+            console.log("Krock");
+            
         }
     }
 }
 function krock2() {
     /* Om monster krockar med piggan */
-    if ((piga.rad * 50) < monster2.x && monster2.x < (piga.rad * 50 + 50)) {
+    if ((piga.rad * 50) < monster2.y && monster2.y < (piga.rad * 50 + 50)) {
         if ((piga.kol * 50) < monster2.x && monster2.x < (piga.kol * 50 + 50)) {
             ctx.fillStyle = "#999";
             ctx.fillRect(0, 0, 800, 600);
             ctx.fillStyle = "red";
             ctx.fillText("Game Over!", 400, 300);
             gameOver = true;
+            console.log("Krock2");
         }
     }
 }
 function krock3() {
     /* Om monster krockar med piggan */
-    if ((piga.rad * 50) < monster3.x && monster3.x < (piga.rad * 50 + 50)) {
+    if ((piga.rad * 50) < monster3.y && monster3.y < (piga.rad * 50 + 50)) {
         if ((piga.kol * 50) < monster3.x && monster3.x < (piga.kol * 50 + 50)) {
             ctx.fillStyle = "#999";
             ctx.fillRect(0, 0, 800, 600);
             ctx.fillStyle = "red";
             ctx.fillText("Game Over!", 400, 300);
             gameOver = true;
+            console.log("Krock3");
         }
     }
 }
