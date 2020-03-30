@@ -11,11 +11,12 @@ canvas {
    height: 600px;
 }
 .kontainer{
-   color: #FFF;
-   background: #c0bdbd;
-   border: 2px solid #fff;
    margin: 20px auto;
-   width: 800px;
+   width: 900px;
    display: grid;
    grid-template-columns: auto auto;
+}
+h4 {
+   margin-top: 20px;
+   color: #fff;
 }
