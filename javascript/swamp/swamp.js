@@ -52,7 +52,7 @@ var mynt3 = {
     bild: new Image()
 }
 /* Spelets variabler */
-var gameOver = false;
+var isGameOver = false;
 var poäng = 0;
 
 var karta = [
@@ -101,6 +101,14 @@ ctx.font = "96px Sans-serif";
 ctx.textAlign = "center";
 ctx.fillStyle = "#FFF";
 
+/* När man krockar med monster */
+function gameOver() {
+    ctx.fillStyle = "#999";
+    ctx.fillRect(0, 0, 800, 600);
+    ctx.fillStyle = "red";
+    ctx.fillText("Game Over!", 400, 300);
+}
+
 /* Lyssna på pil-tangenterna */
 window.addEventListener("keydown", function (e) {
     switch (e.key) {
@@ -109,13 +117,13 @@ window.addEventListener("keydown", function (e) {
                 piga.kol++; 
             }
             
-            piga.rot = 90 * (Math.PI / 180);
+            piga.rot = 90;
             break;
         case "ArrowLeft":
             if (karta[piga.rad][piga.kol - 1] == 0) {
                 piga.kol--;
             }
-            piga.rot = -90 * (Math.PI / 180);
+            piga.rot = 270;
             break;
         case "ArrowUp":
             if (karta[piga.rad - 1][piga.kol] == 0) {
@@ -128,7 +136,7 @@ window.addEventListener("keydown", function (e) {
                 piga.rad++; 
             }
             
-            piga.rot = Math.PI;
+            piga.rot = 180;
             break;
     }
 });
@@ -149,8 +157,10 @@ function gameLoop() {
 
 
     
-    if (!gameOver) {
+    if (!isGameOver) {
         requestAnimationFrame(gameLoop);
+    } else {
+        gameOver();
     }
     
 }
@@ -165,7 +175,7 @@ gameLoop();
 function ritaPiga() {
     ctx.save();
     ctx.translate(piga.kol * 50 + 25, piga.rad * 50 + 25);
-    ctx.rotate(piga.rot);
+    ctx.rotate(piga.rot * (Math.PI / 180));
     ctx.drawImage(piga.bild, -25, -25, 50, 50);
     ctx.restore();
 }
@@ -189,35 +199,36 @@ function ritaMynten(mynt) {
         mynt.x = Math.ceil(Math.random() * 750);
         mynt.y = -Math.ceil(Math.random() * 750);
     }
+    isGameover = false;
 }
 /* Kolla om monster figuren krockar med pigan*/
 function krockMedPiga(figur) {
+    var px = piga.kol * 50;
+    var py = piga.rad * 50 + 25;
+
     /* Om monster krockar med piggan */
-    if ((piga.rad * 50) < figur.y && figur.y < (piga.rad * 50 + 50)) {
-        if ((piga.kol * 50) < figur.x && figur.x < (piga.kol * 50 + 50)) {
-            ctx.fillStyle = "#999";
-            ctx.fillRect(0, 0, 800, 600);
-            ctx.fillStyle = "red";
-            ctx.fillText("Game Over!", 400, 300);
-            gameOver = true;
+    if (py < figur.y && figur.y < py + 50) {
+        if (px < figur.x && figur.x < px + 50) {
+            isGameOver = true;
         }
     }
 }
 
 /* Kolla om man tar upp mynten */
 function TaUppMynt(mynt) {
-    if ((piga.rad * 50) < mynt.y && mynt.y < (piga.rad * 50 + 50)) {
-        if ((piga.kol * 50) < mynt.x && mynt.x < (piga.kol * 50 + 50)) {
+    var px = piga.kol * 50;
+    var py = piga.rad * 50 + 25;
+
+    if (py < mynt.y && mynt.y < py + 50) {
+        if (px < mynt.x && mynt.x < px + 50) {
             poäng++;
             ePoäng.textContent = poäng;
-
-
 
             if (poäng) {
                 mynt.x = Math.ceil(Math.random() * 750);
                 mynt.y = -Math.ceil(Math.random() * 500);
             }
-            gameOver = false;
+            isGameOver = false;
         }
     }
 }
