@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="#">
+    <title>Testar att visa Tiled karta i canvas</title>
+    <link rel="stylesheet" href="./tiled.css">
+</head>
+<body>
+    <canvas></canvas>
+    <script>
+        /* Element vi jobbar med */
+        const eCanvas = document.querySelector("canvas");
+
+        /* Ställ in bredd och höjd */
+        /* Saamma mått som i tiled programmet */
+        eCanvas.width = 1280;
+        eCanvas.height = 800;
+
+        /* Starta ritmotorn */
+        var ctx = eCanvas.getContext("2d");
+
+        /* Objekt */
+        var spelplan = {
+            höjd: 25,
+            bredd: 40,
+            rutor: 16,
+            bild : new Image()
+        };
+
+        /* Ladda in tileSheet */
+        spelplan.bild.src = "./forest_tiles.png";
+
+        /* ************ */
+        /* Funktioner */
+        function läsaInJson() {
+            /* Skapa ajax för att kunna hämta in en fil */
+            var ajax = new XMLHttpRequest();
+
+            /* Gör ett anrop */
+            ajax.open("POST", "./tiled.json", true);
+            ajax.send();
+
+            /* Ta emot svaret */
+            ajax.addEventListener("loadend", function () {
+                console.log(this.responseText);
+                
+            });
+        }
+        läsaInJson();
+        function ritaSpelPlan() {
+            var index = 0;
+
+            /* Gå igenom varje rad */
+            for (let rad = 0; rad < spelplan.höjd; rad++) {
+
+                /* Gå igenom varje kolumn på canvas */
+                for (let kol = 0; kol < spelplan.bredd; kol++) {
+
+                    /* Rita inte ut om rutan är tom */
+                    if (spelplan.karta[index] != 0) {   
+
+                        /* Räkna position i tilesheet */
+                        var rutaX = Math.floor(spelplan.karta[index] % 16 - 1) * 32;
+                        var rutaY= Math.floor(spelplan.karta[index] / 16) * 32;
+
+                        /* Rita ut på canvas */
+                        ctx.drawImage(spelplan.bild, rutaX, rutaY, 32, 32, kol * 32, rad * 32, 32, 32);
+                    }
+                    /* Gå till nästa position på canvas */
+                    index++;
+                }
+            }
+        }
+
+       spelplan.bild.addEventListener("load", ritaSpelPlan);
+    </script>
+</body>
+</html>
