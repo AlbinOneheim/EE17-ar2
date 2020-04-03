@@ -53,7 +53,7 @@
                 console.log(lager.name, lager.height, lager.width);
             
                 ritaSpelPlan(lager);
-            })
+            });
             });
         }
 
@@ -67,7 +67,7 @@
                 for (let kol = 0; kol < lager.width; kol++) {
 
                     /* Rita inte ut om rutan är tom */
-                    if (lager.karta[index] != 0) {   
+                    if (lager.data[index] != 0) {   
 
                         /* Räkna position i tilesheet */
                         var rutaX = Math.floor(lager.data[index] % 16 - 1) * 32;
