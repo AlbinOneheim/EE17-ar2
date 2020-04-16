@@ -8,16 +8,23 @@ eCanvas.height = 480;
 
 /* Objekten i spelet */
 var spel = {
-    tid: 1,
+    tid: 60,
     poäng: 0,
     isGameOver: false,
     bild: new Image()
 };
 var hjälte = {
-    x: 0,
-    y: 0,
+    x: eCanvas.width / 2,
+    y: eCanvas.height / 2,
     a: 5,
-    bild: new Image()
+    vänster: false,
+    höger: false,
+    upp: false,
+    ned: false,
+    bild: new Image(),
+    rutIndex: 0,
+    rutAntal: 4,
+    rutRad: 0
 };
 var monster = {
     x: 0,
@@ -27,11 +34,10 @@ var monster = {
 
 /* Ladda in bilderna */
 spel.bild.src = "./bilder/background.png";
-hjälte.bild.src = "./bilder/hero.png";
+hjälte.bild.src = "./bilder/pokemon-blue-sprite.png";
 monster.bild.src = "./bilder/monster.png";
 
 /* Canvas inställningar */
-ctx.font = "24px Helvetica";
 ctx.fillStyle = "#FFF";
 
 
@@ -46,29 +52,38 @@ gameLoop();
 window.addEventListener("keydown", function(e) {
     switch (e.key) {
         case "ArrowUp":
-            if (hjälte.y > 32) {
-                hjälte.y -= hjälte.a;
-            }
+            hjälte.upp = true;
             break;
         
         case "ArrowDown":
-            if (hjälte.y < 420) {
-                hjälte.y += hjälte.a; 
-            }
-           
+            hjälte.ned = true;
             break;
 
         case "ArrowLeft":
-            if (hjälte.x > 32) {
-                hjälte.x -= hjälte.a;
-            }
+            hjälte.vänster = true;
             break;
 
         case "ArrowRight":
-            if (hjälte.x < 455) {
-                hjälte.x += hjälte.a;
-            }
+            hjälte.höger = true;
+    }
+});
+
+window.addEventListener("keyup", function(e) {
+    switch (e.key) {
+        case "ArrowUp":
+            hjälte.upp = false;
             break;
+        
+        case "ArrowDown":
+            hjälte.ned = false;
+            break;
+
+        case "ArrowLeft":
+            hjälte.vänster = false;
+            break;
+
+        case "ArrowRight":
+            hjälte.höger = false;
     }
 });
 
@@ -77,6 +92,7 @@ window.setInterval(function() {
 
     if (spel.tid <= 0) {
         spel.isGameOver = true;
+        ctx.font = "80px Helvetica";
         ctx.fillText("Game Over!", 32, 200);
     }
 }, 1000);
@@ -87,8 +103,6 @@ window.setInterval(function() {
 /* Återställ spelet */
 /* Placera ut hjälten */
 function reset() {
-    hjälte.x = eCanvas.width / 2;
-    hjälte.y = eCanvas.height / 2;
 
 /* Spawna monstret slumpmässigt */
     monster.x = 32 + Math.random() * (eCanvas.width - 96);
@@ -100,7 +114,36 @@ function ritaBakgrund() {
     ctx.drawImage(spel.bild, 0, 0);
 }
 function ritaHjälte() {
-    ctx.drawImage(hjälte.bild, hjälte.x, hjälte.y);
+    /* Flytta åt det håll vi trycket på piltangeterna */
+    if (hjälte.höger) {
+        hjälte.x += 3;
+        hjälte.rutRad = 2
+    } else if (hjälte.vänster) {
+        hjälte.x -= 3;
+        hjälte.rutRad = 1
+    } else if (hjälte.ned) {
+        hjälte.y += 3;
+        hjälte.rutRad = 0
+    } else if (hjälte.upp) {
+        hjälte.y -= 3;
+        hjälte.rutRad = 3
+    } 
+
+    /* Animera med sprite */
+    if (hjälte.höger || hjälte.vänster || hjälte.ned || hjälte.upp) {
+        var ruta = Math.floor(hjälte.rutIndex / 20);
+            ctx.save();
+            ctx.translate(hjälte.x, hjälte.y);
+            ctx.drawImage(hjälte.bild, ruta * 68, hjälte.rutRad * 72, 68, 72, 0, 0, 50, 50);
+            ctx.restore();
+
+            hjälte.rutIndex++;
+            if (hjälte.rutIndex == hjälte.rutAntal * 20) {
+                hjälte.rutIndex = 0;
+            }
+    } else {
+        ctx.drawImage(hjälte.bild, 0, 0, 68, 72, hjälte.x, hjälte.y, 50, 50);
+    }
 }
 function ritaMonster() {
     ctx.drawImage(monster.bild, monster.x, monster.y);
@@ -113,6 +156,7 @@ function kollaKollision() {
             spel.poäng++;
     }
     /* Skriv ut */
+    ctx.font = "24px Helvetica";
     ctx.fillText("Fångade monster: " + spel.poäng, 33, 50);
     ctx.fillText("Tid kvar: " + spel.tid, 33, 70);
 }
@@ -129,5 +173,4 @@ function gameLoop() {
     if (!spel.isGameOver) {
         requestAnimationFrame(gameLoop);
     }
-    
 }
