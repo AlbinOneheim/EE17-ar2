@@ -11,6 +11,7 @@
         <canvas></canvas>
         <div>
             <h1>Rädda Pikachu</h1>
+            <h2>Liv <span id="liv">3</span></h2>
 
         </div>
     </div>
@@ -18,24 +19,27 @@
         /* Ikoner från https://icons8.com/icon/set/game/color */
         /* Ställ in canvas */
         const eCanvas = document.querySelector("canvas");
+        const eLiv = document.querySelector("#liv");
         
         eCanvas.width = 1200;
         eCanvas.height = 1000;
         var ctx = eCanvas.getContext("2d");
+
+        ctx.fillStyle = "#000";
 
         /* ****************************** */
         /*           Objekten             */
         /* ****************************** */
 
         var spel = {
-            poäng: 0,
+            liv: 3,
             key: 0,
             isGameOver: false
         }
         var pikachu = {
             x: 0,
+            dx: 10,
             y: 900,
-            liv: 3,
             bild: new Image()
         };
         var pokeball = {
@@ -138,13 +142,18 @@
         /* ****************************** */
 
         function ritaMonster(figur) {
-                ctx.drawImage(figur.bild, 0, 0, 50, 50, figur.x, figur.y, 50, 50);
-                figur.y += figur.dy;
-                if (figur.y >= 1000) {
-                    figur.y = 0;
-                }
+            ctx.drawImage(figur.bild, 0, 0, 50, 50, figur.x, figur.y, 50,50);
+            figur.y += figur.dy;
+            if (figur.y >= 1000) {
+                figur.y = 0;
             }
-
+            if (pokeball.x <= (figur.x + 50) && figur.x <= (pokeball.x + 50) &&
+                pokeball.y <= (figur.y + 50) && figur.y <= (pokeball.y + 50)) {
+                    figur.x = Math.random() * 1100;
+                    figur.y = -50;  
+            }
+        }
+        
         /* Rita ut pikachu */
         function ritaPikachu() {
             ctx.drawImage(pikachu.bild, 0, 0, 96, 96, pikachu.x, pikachu.y, 96, 96);
@@ -159,19 +168,18 @@
             }
             
         }
-
         /* https://keycode.info */
         function uppdatera() {
             switch (spel.key) {
                 case 39: // Pil åt höger
                 if (pikachu.x < 1100) {
-                    pikachu.x += 20;
+                    pikachu.x += pikachu.dx;
                 }
                     
                     break;
                 case 37: // pil åt vänster
                 if (pikachu.x > 0) {
-                    pikachu.x -= 20;
+                    pikachu.x -= pikachu.dx;
                 }
                     
                     break;
@@ -208,7 +216,10 @@
             /* Uppdatera positioner */
             uppdatera();
 
-            requestAnimationFrame(loopen);
+            if (!spel.isGameOver) {
+                requestAnimationFrame(loopen);
+            }
+            
         }
 
         /* Lyssna på input */
