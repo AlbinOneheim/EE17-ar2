@@ -47,11 +47,27 @@ function showPosition(position) {
     /* Skicka lat och lon till php-skriptet mha ajax */
     var ajax = new XMLHttpRequest();
 
-    ajax.open("POST", "./trafiklab.php", true);
+    ajax.open("POST", "http://localhost:8080/api/trafiklab/trafiklab.php    ", true);
     ajax.send(postData);
 
     ajax.addEventListener("loadend", function() {
         console.log(this.responseText);
-        
-    })
+
+        /* Infoga alal hållplatser i kartan */
+        var hållplatser = JSON.parse(this.responseText);
+
+        hållplatser.forEach(function (hållplats) {
+            console.log(hållplats.name, hållplats.lat, hållplats.lon);
+            var buss = document.createElement('div');
+            buss.className = 'buss';
+
+        var popup = new mapboxgl.Popup({offset: 25})
+            .setText(hållplats.name);
+
+        new mapboxgl.Marker(buss)
+            .setLngLat([hållplats.lon, hållplats.lat])
+            .setPopup(popup)
+            .addTo(map);
+        });   
+    });
 }

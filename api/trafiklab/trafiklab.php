@@ -11,7 +11,7 @@
 /* Ta emot POST-data från klienten */
 $lat = filter_input(INPUT_POST, 'lat', FILTER_SANITIZE_STRING);
 $lon = filter_input(INPUT_POST, 'lon', FILTER_SANITIZE_STRING);
-var_dump($lat, $lon);
+
 
 if ($lat && $lon) {
 
@@ -34,7 +34,11 @@ if ($lat && $lon) {
     /* Avkoda Json */
     $jsonData = json_decode($json);
 
-    var_dump($jsonData);
+    /* Plocka ut hållplatserna (array) */
+    $stopLocation = $jsonData->LocationList->StopLocation;
+
+    /* Skicka tillbacka arrayen */
+    echo json_encode($stopLocation);
 
 } else {
     echo "Något blev fel med indata.";

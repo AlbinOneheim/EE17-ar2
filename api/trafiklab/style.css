@@ -33,3 +33,18 @@ body {
     bottom: 0;
     width: 100%;
 }
+.nti {
+    background: url("./bilder/school-building-48.png");
+    background-size: cover;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+}
+
+.buss {
+    background: url("./bilder/bus-stop-48.png");
+    background-size: cover;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+}

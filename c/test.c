@@ -6,6 +6,7 @@
 
 int main(void)
 {
-    printf("hgasd");
+    
+
     return 0;
 }
