@@ -4,7 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Vädret</title>
+<<<<<<< HEAD:api.json/owm/index.php
     <link rel="stylesheet" href="../style.css">
+=======
+    <link rel="stylesheet" href="./style.css">
+>>>>>>> 0682eef1c5d817279cfc931dc491edefaaed29d0:api/owm/index.php
 </head>
 <body>
     <div class="kontainer">

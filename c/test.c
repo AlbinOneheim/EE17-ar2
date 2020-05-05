@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <math.h>
+<<<<<<< HEAD
 #include <time.h>
 
 int main(void)
@@ -22,6 +23,11 @@ int main(void)
         
     }
     
+=======
+
+int main(void)
+{
+>>>>>>> 0682eef1c5d817279cfc931dc491edefaaed29d0
     
 
     return 0;
