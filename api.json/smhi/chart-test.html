@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Testar Chart.js</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <link rel="stylesheet" href="prognos.css">
+    
+</head>
+<body>
+    <div class="kontainer">
+        <canvas id="myChart" width="300" height="100"></canvas>
+    </div>
+    <script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [
+                '2020-04-27', 
+                '', 
+                '',
+                '',
+                '',
+                '2020-04-28'
+            ]
+            ,
+            datasets: [{
+                label: 'SMHI prognos',
+                data: [6.2, 6.8, 7, 7.3, 7.3, 10.1],
+                backgroundColor: [
+                    'rgb(173, 123, 222, 0.4)'
+                ],
+                borderColor: [
+                    'red'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+    </script>
+</body>
+</html>
