@@ -38,6 +38,11 @@ function showPosition(position) {
     .setLngLat([lonHem, latHem])
     .addTo(map);
     
+    map.flyTo({
+        center: [lonHem, latHem],
+        zoom: 15,
+        speed: 0.3
+    });
 
     /* Packa in latHem och lonHem till ett POST-packet */
     var postData = new FormData();
@@ -47,7 +52,7 @@ function showPosition(position) {
     /* Skicka lat och lon till php-skriptet mha ajax */
     var ajax = new XMLHttpRequest();
 
-    ajax.open("POST", "http://localhost:8080/api/trafiklab/trafiklab.php    ", true);
+    ajax.open("POST", "http://localhost:8080/EE17-ar2/api.json/trafiklab/trafiklab.php", true);
     ajax.send(postData);
 
     ajax.addEventListener("loadend", function() {
